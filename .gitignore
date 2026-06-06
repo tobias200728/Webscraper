@@ -24,6 +24,6 @@ out/
 .DS_Store
 Thumbs.db
 
-# Docker volumes
-pgdata/
-redisdata/
+# Logs
+uvicorn_log.txt
+uvicorn_err.txt
