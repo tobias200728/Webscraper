@@ -13,7 +13,15 @@ app = FastAPI(
     version="2.0.0",
 )
 
-cors_origins = settings.CORS_ORIGINS
+import json as _json
+
+def _parse_origins(raw: str) -> list:
+    raw = raw.strip()
+    if raw.startswith("["):
+        return _json.loads(raw)
+    return [o.strip() for o in raw.split(",")]
+
+cors_origins = _parse_origins(settings.CORS_ORIGINS)
 allow_all = cors_origins == ["*"] or "*" in cors_origins
 
 app.add_middleware(
